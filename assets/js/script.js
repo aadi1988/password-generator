@@ -36,22 +36,7 @@ var call_getinput = function(){
   return arr;
 }
 
-
-var generatePassword = function(){
-   var password_length = window.prompt("What is the password length: Choose a value between 8 and 128");
-   if (password_length < 8 || password_length > 128 || password_length == null || password_length == "" ){
-          window.prompt("Invalid password, Please enter password length again");
-          generatePassword();
-   } 
-   
-   var arr = call_getinput();
-   
-   if (arr.length == 0) {
-       window.prompt("Choose atleast one character type");
-       call_getinput();
-   }
-       
-
+var password_gen = function(arr,len){
   var ch_lower = "abcdefghijklmnopqrstuvwxyz";
   var ch_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var num = "0123456789";
@@ -63,7 +48,7 @@ var generatePassword = function(){
        switch(arr[i]){
            case "lowercase":
                 start = 0;
-                end = Number(Math.floor(password_length/arr.length));
+                end = Number(Math.floor(len/arr.length));
                 str1 = ch_lower;
                 password = random_gen(start,end,str1,password);
                 console.log("lowercase");
@@ -71,21 +56,21 @@ var generatePassword = function(){
                 break;
            case "uppercase":
                 start = password.length;
-                end = start + Number(Math.floor(password_length/arr.length));
+                end = start + Number(Math.floor(len/arr.length));
                 str1 = ch_upper;
                 password = random_gen(start,end,str1,password);
                 console.log("uppercase");
                 break;
            case "numeric":
                 start = password.length;
-                end = start + Number(Math.floor(password_length/arr.length));
+                end = start + Number(Math.floor(len/arr.length));
                 str1 = num;
                 password = random_gen(start,end,str1,password);
                 console.log("numeric");
                 break;
            case "special characters":
                 start = password.length;
-                end = start + Number(Math.floor(password_length/arr.length));
+                end = start + Number(Math.floor(len/arr.length));
                 str1 = special;
                 password = random_gen(start,end,str1,password);
                 console.log("special");
@@ -93,8 +78,29 @@ var generatePassword = function(){
            
        }   
   }
+  return password;
+}
+
+
+var generatePassword = function(){
+  var password_length = window.prompt("What is the password length: Choose a value between 8 and 128");
+  if (password_length < 8 || password_length > 128 || password_length == null || password_length == "" ){
+          window.prompt("Invalid password, Please enter password length again");
+          generatePassword();
+   } 
+   
+  var arr = call_getinput();
+   
+  if (arr.length == 0) {
+       window.prompt("Choose atleast one character type");
+       call_getinput();
+   }
+       
+  var password = password_gen(arr,password_length);
+  
   
   window.alert(password);
+  var ch_lower = "abcdefghijklmnopqrstuvwxyz";
   if (password.lenth != password_length){
         
         start = password.length;
