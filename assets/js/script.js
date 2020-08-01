@@ -7,6 +7,35 @@ var random_gen = function(start,end,str1,password){
   return password;
 }
 
+var getinput = function(input,arr,input_str){
+    var prompt_str  = "Choose Yes if " + input_str + " characters should be included, No if not:"
+    input = window.prompt(prompt_str);
+    if (input.toLowerCase() == "yes"){
+        console.log(arr);
+        console.log(input_str);
+        arr.push(input_str);
+        
+        
+    }
+    else if(input.toLowerCase() != "yes" && input.toLowerCase() != "no"){
+      console.log(input);
+      window.alert("Please enter a valid value");
+      getinput(input,arr,input_str);
+    }
+    
+    return arr;
+}
+
+var call_getinput = function(){
+  var arr = [];
+  var input;
+  arr = getinput(input,arr,"lowercase");
+  arr = getinput(input,arr,"uppercase");
+  arr = getinput(input,arr,"numeric");
+  arr = getinput(input,arr,"special characters");
+  return arr;
+}
+
 
 var generatePassword = function(){
    var password_length = window.prompt("What is the password length: Choose a value between 8 and 128");
@@ -14,29 +43,13 @@ var generatePassword = function(){
           window.prompt("Invalid password, Please enter password length again");
           generatePassword();
    } 
-   var arr = [];
-   var lowercase = window.prompt("Choose Yes if lowercase characters should be included, No if not:");
-   if (lowercase == "Yes"){
-       arr.push("lowercase");
-   }
-   var uppercase = window.prompt("Choose Yes if uppercase characters should be included, No if not");
-   if (uppercase == "Yes"){
-       arr.push("uppercase");
-   }
-   var numeric = window.prompt("Choose Yes if numbers should be included, No if not");
-   if (numeric == "Yes"){
-       arr.push("numeric");
-   }
-
-   var special_char = window.prompt("Choose Yes if special characters should be included, No if not");
-   if (special_char == "Yes"){
-       arr.push("special characters");
-   }
-
-  window.alert(arr);
-  if (arr.length == 0) {
+   
+   var arr = call_getinput();
+   
+   if (arr.length == 0) {
        window.prompt("Choose atleast one character type");
-  }
+       call_getinput();
+   }
        
 
   var ch_lower = "abcdefghijklmnopqrstuvwxyz";
