@@ -15,10 +15,14 @@ SO THAT I can create a strong password that provides greater security
 4) Display the password on the page.
 
 #### Screenshots of what the app looks like:
+##### Main Page
 ![Main page](assets/images/main_page.png)
+##### Select the password length
 ![Select the password length](assets/images/select_pass_len.png)
+##### Select the character types to be used in the password
 ![Select the character types to be included in the password](assets/images/char_option.png)
+##### Display the password
 ![Display the password](assets/images/final_pass.png)
 
-Link to my website: https://aadi1988.github.io/password-generator/
+#### Link to my website: https://aadi1988.github.io/password-generator/
 
