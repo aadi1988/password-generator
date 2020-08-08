@@ -41,18 +41,13 @@ var password_randomizer = function(password,password_length,arr){
 var getinput = function(input,arr,input_str){
     var prompt_str  = "Choose Yes if " + input_str + " characters should be included, No if not:"
     input = window.prompt(prompt_str);
-    if (input.toLowerCase() == "yes"){
-       
-        arr.push(input_str);
-        
-        
+    if (input.toLowerCase() == "yes"){   
+        arr.push(input_str);        
     }
     else if(input.toLowerCase() != "yes" && input.toLowerCase() != "no"){
-      
       window.alert("Please enter a valid value");
       getinput(input,arr,input_str);
     }
-    
     return arr;
 }
 
@@ -70,44 +65,34 @@ var call_getinput = function(){
 
 //Create an initial password from the user given options.
 var password_gen = function(arr,len,password){
-  
-  
-
     for (var j=0; j<arr.length;j++){
        switch(arr[j]){
            case "lowercase":
                 start = password.length;
                 end = start + Number(Math.floor(len/arr.length));
                 str1 = ch_lower;
-                password = random_gen(start,end,str1,password);
-                
-                
+                password = random_gen(start,end,str1,password);             
                 break;
            case "uppercase":
                 start = password.length;
                 end = start + Number(Math.floor(len/arr.length));
                 str1 = ch_upper;
-                password = random_gen(start,end,str1,password);
-                
+                password = random_gen(start,end,str1,password);            
                 break;
            case "numeric":
                 start = password.length;
                 end = start + Number(Math.floor(len/arr.length));
                 str1 = num;
-                password = random_gen(start,end,str1,password);
-                
+                password = random_gen(start,end,str1,password);        
                 break;
            case "special characters":
                 start = password.length;
                 end = start + Number(Math.floor(len/arr.length));
                 str1 = special;
-                password = random_gen(start,end,str1,password);
-                
+                password = random_gen(start,end,str1,password);             
                 break;
-        }  
-         
-  }
-  
+        }         
+    }  
   return password;
 }
 
@@ -118,33 +103,25 @@ var generatePassword = function(){
   if (password_length < 8 || password_length > 128 || password_length == null || password_length == "" ){
           window.prompt("Invalid password, Please enter password length again");
           generatePassword();
-   } 
-   
+   }   
   var arr = call_getinput();
-   
   if (arr.length == 0) {
        window.prompt("Choose atleast one character type");
        call_getinput();
    }
-       
   password = password_gen(arr,password_length,password);
-  
   password = password_randomizer(password,password_length,arr);
-  
   return password.join("");
   
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
-
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 
 }
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
